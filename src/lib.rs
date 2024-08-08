@@ -1,5 +1,8 @@
 #![feature(portable_simd)]
 
+#[cfg(test)]
+mod test;
+
 use std::{
     fmt::{Display, Write},
     marker::PhantomData,
@@ -13,7 +16,13 @@ pub type Cell = u16;
 
 pub type Region = u16x16;
 
-trait Game {
+mod seal {
+    pub trait Seal {}
+    impl Seal for super::Sudoku16 {}
+    impl Seal for super::Sudoku9 {}
+}
+
+pub trait Game: seal::Seal {
     const TOTAL_CELLS: usize;
     const CELLS_PER_REGION: usize;
     const POSSIBILITIES_PER_CELL: usize;
@@ -142,6 +151,3 @@ impl Board<Sudoku16> {
         }
     }
 }
-
-#[cfg(test)]
-mod test;
