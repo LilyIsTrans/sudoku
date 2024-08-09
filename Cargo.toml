@@ -5,5 +5,6 @@ edition = "2021"
 authors = ["Lily McCabe <lily@lilymccabe.ca>"]
 
 [dependencies]
+arrayvec = "0.7.4"
 
 [features]
